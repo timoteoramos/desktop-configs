@@ -55,7 +55,6 @@ add_xresources: ~/.Xresources
 
 .PHONY: add_zsh
 add_zsh: ~/.zshrc
-	@echo "In order to complete the zshell setup, you need to restart your zshell instance."
 
 .PHONY: del_kitty
 del_kitty:
@@ -79,6 +78,7 @@ del_xresources:
 	@echo "Removing Xresources..."
 	rm -Rf ~/.Xresources
 
+.PHONY: del_zsh
 del_zsh:
 	rm -Rf ~/.zshrc
 	rm -Rf ~/.local/share/zinit
