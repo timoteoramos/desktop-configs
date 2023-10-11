@@ -63,6 +63,10 @@
 	@echo "Installing GTK3 system-wide config..."
 	cp system/settings.ini /etc/gtk-3.0/
 
+/etc/tmux.conf:
+	@echo "Installing tmux system-wide config..."
+	cp system/tmux.conf /etc/tmux.conf
+
 .PHONY: add_kitty
 add_kitty: ~/.config/kitty/kitty.conf ~/.config/ranger/rc.conf
 
@@ -117,11 +121,19 @@ del_zsh:
 .PHONY: sysadd_gtk
 sysadd_gtk: /etc/gtk-2.0/gtkrc /etc/gtk-3.0/settings.ini
 
+.PHONY: sysadd_tmux
+sysadd_tmux: /etc/tmux.conf
+
 .PHONY: sysdel_gtk
 sysdel_gtk:
 	@echo "Removing GTK system-wide configuration..."
 	rm -Rf /etc/gtk-2.0/gtkrc
 	rm -Rf /etc/gtk-3.0/settings.ini
+
+.PHONY: sysdel_tmux
+sysdel_tmux:
+	@echo "Removing tmux system-wide configuration..."
+	rm -Rf /etc/tmux.conf
 
 .PHONY: install
 install: add_kitty add_qutebrowser add_rofi add_tmux add_xresources add_zsh
@@ -132,7 +144,7 @@ install: add_kitty add_qutebrowser add_rofi add_tmux add_xresources add_zsh
 clean: del_kitty del_qutebrowser del_rofi del_tmux del_xresources del_zsh
 
 .PHONY: sysinstall
-sysinstall: sysadd_gtk
+sysinstall: sysadd_gtk sysadd_tmux
 
 .PHONY: sysclean
-sysclean: sysdel_gtk
+sysclean: sysdel_gtk sysdel_tmux
