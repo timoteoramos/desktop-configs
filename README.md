@@ -6,4 +6,32 @@ I chose Seti UI as my default theme for terminal and all tools compatible with [
 
 ## Setup
 
-Just make sure you have GNU make installed in your system and run `make` in order to install all configurations. If you just want a specific configuration, you can run the other actions separately. You can also use the `make clean` action in order to remove all the configurations.
+Just make sure you have GNU make installed in your system and run `make` in order to install all user configurations. If you just want a specific configuration, you can run the other targets separately. You can also use the `clean` target in order to remove all the configurations.
+
+## Makefile Targets
+
+```bash
+# Install all user configurations
+make install
+
+# Uninstall all user configurations
+make clean
+
+# Install all system configurations
+sudo make sysinstall
+
+# Uninstall all system configurations
+sudo make sysclean
+
+# Install specific user configurations
+make add_kitty add_qutebrowser add_rofi add_tmux add_xresources add_zsh
+
+# Uninstall specific user configurations
+make del_kitty del_qutebrowser del_rofi del_tmux del_xresources del_zsh
+
+# Install specific system configurations
+sudo make sysadd_gtk sysadd_tmux sysadd_zsh
+
+# Uninstall specific system configurations
+sudo make sysdel_gtk sysdel_tmux sysdel_zsh
+```
