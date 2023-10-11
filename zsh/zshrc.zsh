@@ -31,3 +31,5 @@ zinit for \
     pick"async.zsh" \
     src"pure.zsh" \
   sindresorhus/pure
+
+zstyle :prompt:pure:path color white
