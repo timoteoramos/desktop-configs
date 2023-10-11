@@ -1,5 +1,9 @@
 .DEFAULT_GOAL := install
 
+~/.Xresources:
+	@echo "Installinx Xresources..."
+	cp xresources/Xresources ~/.Xresources
+
 ~/.zshrc:
 	@echo "Installing zshrc config..."
 	cp zsh/zshrc.zsh ~/.zshrc
@@ -45,6 +49,10 @@ add_qutebrowser: ~/.config/qutebrowser/config.py
 .PHONY: add_rofi
 add_rofi: ~/.config/rofi/base16-seti.rasi ~/.config/rofi/config.rasi
 
+.PHONY: add_xresources
+add_xresources: ~/.Xresources
+	xrdb ~/.Xresources
+
 .PHONY: add_zsh
 add_zsh: ~/.zshrc
 	@echo "In order to complete the zshell setup, you need to restart your zshell instance."
@@ -66,13 +74,18 @@ del_rofi:
 	rm -Rf ~/.config/rofi/base16-seti.rasi
 	rm -Rf ~/.config/rofi/config.rasi
 
+.PHONY: del_xresources
+del_xresources:
+	@echo "Removing Xresources..."
+	rm -Rf ~/.Xresources
+
 del_zsh:
 	rm -Rf ~/.zshrc
 	rm -Rf ~/.local/share/zinit
 
 .PHONY: install
-install: add_kitty add_qutebrowser add_rofi add_zsh
+install: add_kitty add_qutebrowser add_rofi add_xresources add_zsh
 	@echo "Notes for zsh: the setup will finish when you start a new zshell instance."
 
 .PHONY: clean
-clean: del_kitty del_qutebrowser del_rofi del_zsh
+clean: del_kitty del_qutebrowser del_rofi del_xresources del_zsh
