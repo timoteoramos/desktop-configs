@@ -24,10 +24,10 @@ sudo make sysinstall
 sudo make sysclean
 
 # Install specific user configurations
-make add_kitty add_qutebrowser add_rofi add_tmux add_xresources add_zsh
+make add_kitty add_qutebrowser add_ranger add_rofi add_tmux add_xresources add_zsh
 
 # Uninstall specific user configurations
-make del_kitty del_qutebrowser del_rofi del_tmux del_xresources del_zsh
+make del_kitty del_qutebrowser add_ranger del_rofi del_tmux del_xresources del_zsh
 
 # Install specific system configurations
 sudo make sysadd_gtk sysadd_tmux sysadd_zsh

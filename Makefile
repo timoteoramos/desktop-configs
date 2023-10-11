@@ -2,7 +2,6 @@
 EDITOR=vi
 ZSHPREFIX := /etc
 
-
 ~/.Xresources:
 	@echo "Installinx Xresources..."
 	cp xresources/Xresources ~/.Xresources
@@ -26,8 +25,8 @@ ZSHPREFIX := /etc
 	mkdir ~/.config/ranger
 
 ~/.config/ranger/rc.conf:
-	@echo "Installing Ranger config..."
-	cp kitty/rc.conf ~/.config/ranger
+	@echo "Installing ranger config..."
+	cp ranger/rc.conf ~/.config/ranger
 
 ~/.config/rofi:
 	mkdir ~/.config/rofi
@@ -81,10 +80,13 @@ $(ZSHPREFIX)/zshrc: $(ZSHPREFIX)
 	cp system/zshrc.zsh $(ZSHPREFIX)/zshrc
 
 .PHONY: add_kitty
-add_kitty: ~/.config/kitty/kitty.conf ~/.config/ranger/rc.conf
+add_kitty: ~/.config/kitty/kitty.conf
 
 .PHONY: add_qutebrowser
 add_qutebrowser: ~/.config/qutebrowser/config.py
+
+.PHONY: add_ranger
+add_ranger: ~/.config/ranger/rc.conf
 
 .PHONY: add_rofi
 add_rofi: ~/.config/rofi/base16-seti.rasi ~/.config/rofi/config.rasi
@@ -108,6 +110,11 @@ del_kitty:
 del_qutebrowser:
 	@echo "Removing Qutebrowser configuration"
 	rm -Rf ~/.config/qutebrowser/config.py
+
+.PHONY: del_ranger
+del_ranger:
+	@echo "Removing ranger configuration"
+	rm -Rf ~/.config/ranger/rc.conf
 
 .PHONY: del_rofi
 del_rofi:
@@ -158,12 +165,12 @@ sysdel_zsh:
 	rm -Rf $(ZSHPREFIX)/zshrc
 
 .PHONY: install
-install: add_kitty add_qutebrowser add_rofi add_tmux add_xresources add_zsh
+install: add_kitty add_qutebrowser add_ranger add_rofi add_tmux add_xresources add_zsh
 	@echo "Notes for tmux: you can use <prefix> + I in order to complete the setup."
 	@echo "Notes for zsh: the setup will finish when you start a new zshell instance."
 
 .PHONY: clean
-clean: del_kitty del_qutebrowser del_rofi del_tmux del_xresources del_zsh
+clean: del_kitty del_qutebrowser del_ranger del_rofi del_tmux del_xresources del_zsh
 
 .PHONY: sysinstall
 sysinstall: sysadd_gtk sysadd_tmux sysadd_zsh
