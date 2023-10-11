@@ -2,22 +2,22 @@
 
 ~/.config/kitty/kitty.conf:
 	@echo "Installing Kitty config..."
-	mkdir -p ~/.config/kitty
+	@mkdir -p ~/.config/kitty
 	cp kitty/kitty.conf ~/.config/kitty/
 
 ~/.config/ranger/rc.conf:
 	@echo "Installing Ranger config..."
-	mkdir -p ~/.config/ranger
+	@mkdir -p ~/.config/ranger
 	cp kitty/rc.conf ~/.config/ranger
 
 ~/.config/rofi/base16-seti.rasi:
 	@echo "Downloading base16-seti theme for Rofi..."
-	mkdir -p ~/.config/rofi
+	@mkdir -p ~/.config/rofi
 	curl -s https://gitlab.com/jordiorlando/base16-rofi/-/raw/master/themes/base16-seti.rasi > ~/.config/rofi/base16-seti.rasi
 
 ~/.config/rofi/config.rasi:
 	@echo "Installing Rofi config..."
-	mkdir -p ~/.config/rofi
+	@mkdir -p ~/.config/rofi
 	cp rofi/config.rasi ~/.config/rofi/
 
 .PHONY: add_kitty
