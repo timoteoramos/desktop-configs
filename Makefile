@@ -1,5 +1,9 @@
 .DEFAULT_GOAL := install
 
+~/.zshrc:
+	@echo "Installing zshrc config..."
+	cp zsh/zshrc.zsh ~/.zshrc
+
 ~/.config/kitty/kitty.conf:
 	@echo "Installing Kitty config..."
 	@mkdir -p ~/.config/kitty
@@ -34,6 +38,10 @@ add_qutebrowser: ~/.config/qutebrowser/config.py
 .PHONY: add_rofi
 add_rofi: ~/.config/rofi/base16-seti.rasi ~/.config/rofi/config.rasi
 
+.PHONY: add_zsh
+add_zsh: ~/.zshrc
+	@echo "In order to complete the zshell setup, you need to restart your zshell instance."
+
 .PHONY: del_kitty
 del_kitty:
 	@echo "Removing Kitty and Ranger configurations"
@@ -51,8 +59,13 @@ del_rofi:
 	rm -Rf ~/.config/rofi/base16-seti.rasi
 	rm -Rf ~/.config/rofi/config.rasi
 
+del_zsh:
+	rm -Rf ~/.zshrc
+	rm -Rf ~/.local/share/zinit
+
 .PHONY: install
-install: add_kitty add_qutebrowser add_rofi
+install: add_kitty add_qutebrowser add_rofi add_zsh
+	@echo "Notes for zsh: the setup will finish when you start a new zshell instance."
 
 .PHONY: clean
-clean: del_kitty del_qutebrowser del_rofi
+clean: del_kitty del_qutebrowser del_rofi del_zsh
