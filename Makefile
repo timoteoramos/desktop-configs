@@ -49,6 +49,20 @@
 	@echo "Installing zshrc config..."
 	cp zsh/zshrc.zsh ~/.zshrc
 
+/etc/gtk-2.0:
+	mkdir -p /etc/gtk-2.0
+
+/etc/gtk-2.0/gtkrc: /etc/gtk-2.0
+	@echo "Installing GTK2 system-wide config..."
+	cp system/gtkrc /etc/gtk-2.0/
+
+/etc/gtk-3.0:
+	mkdir -p /etc/gtk-3.0
+
+/etc/gtk-3.0/settings.ini: /etc/gtk-3.0
+	@echo "Installing GTK3 system-wide config..."
+	cp system/settings.ini /etc/gtk-3.0/
+
 .PHONY: add_kitty
 add_kitty: ~/.config/kitty/kitty.conf ~/.config/ranger/rc.conf
 
@@ -100,6 +114,15 @@ del_zsh:
 	rm -Rf ~/.zshrc
 	rm -Rf ~/.local/share/zinit
 
+.PHONY: sysadd_gtk
+sysadd_gtk: /etc/gtk-2.0/gtkrc /etc/gtk-3.0/settings.ini
+
+.PHONY: sysdel_gtk
+sysdel_gtk:
+	@echo "Removing GTK system-wide configuration..."
+	rm -Rf /etc/gtk-2.0/gtkrc
+	rm -Rf /etc/gtk-3.0/settings.ini
+
 .PHONY: install
 install: add_kitty add_qutebrowser add_rofi add_tmux add_xresources add_zsh
 	@echo "Notes for tmux: you can use <prefix> + I in order to complete the setup."
@@ -107,3 +130,9 @@ install: add_kitty add_qutebrowser add_rofi add_tmux add_xresources add_zsh
 
 .PHONY: clean
 clean: del_kitty del_qutebrowser del_rofi del_tmux del_xresources del_zsh
+
+.PHONY: sysinstall
+sysinstall: sysadd_gtk
+
+.PHONY: sysclean
+sysclean: sysdel_gtk
