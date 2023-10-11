@@ -1,0 +1,8 @@
+configuration {
+  modi: "filebrowser,ssh,combi";
+  font: "MesloLGS Nerd Font 12";
+  combi-modi: "window,drun";
+  terminal: "/usr/bin/kitty";
+}
+
+@theme "base16-seti.rasi"
