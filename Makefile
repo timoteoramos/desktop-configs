@@ -3,10 +3,7 @@
 ~/.Xresources:
 	@echo "Installinx Xresources..."
 	cp xresources/Xresources ~/.Xresources
-
-~/.zshrc:
-	@echo "Installing zshrc config..."
-	cp zsh/zshrc.zsh ~/.zshrc
+	xrdb ~/.Xresources
 
 ~/.config/kitty:
 	mkdir -p ~/.config/kitty
@@ -48,6 +45,10 @@
 	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 	@echo "Restart your tmux and run the installer by pressing <prefix> + I"
 
+~/.zshrc:
+	@echo "Installing zshrc config..."
+	cp zsh/zshrc.zsh ~/.zshrc
+
 .PHONY: add_kitty
 add_kitty: ~/.config/kitty/kitty.conf ~/.config/ranger/rc.conf
 
@@ -62,7 +63,6 @@ add_tmux: ~/.tmux.conf ~/.tmux/plugins/tpm
 
 .PHONY: add_xresources
 add_xresources: ~/.Xresources
-	xrdb ~/.Xresources
 
 .PHONY: add_zsh
 add_zsh: ~/.zshrc
