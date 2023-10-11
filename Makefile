@@ -4,29 +4,36 @@
 	@echo "Installing zshrc config..."
 	cp zsh/zshrc.zsh ~/.zshrc
 
-~/.config/kitty/kitty.conf:
+~/.config/kitty:
+	mkdir -p ~/.config/kitty
+
+~/.config/kitty/kitty.conf: ~/.config/kitty
 	@echo "Installing Kitty config..."
-	@mkdir -p ~/.config/kitty
 	cp kitty/kitty.conf ~/.config/kitty/
 
-~/.config/qutebrowser/config.py:
+~/.config/qutebrowser:
+	mkdir ~/.config/qutebrowser
+
+~/.config/qutebrowser/config.py: ~/.config/qutebrowser
 	@echo "Installing Qutebrowser config..."
-	@mkdir -p ~/.config/qutebrowser
 	cp qutebrowser/config.py ~/.config/qutebrowser/
+
+~/.config/ranger:
+	mkdir ~/.config/ranger
 
 ~/.config/ranger/rc.conf:
 	@echo "Installing Ranger config..."
-	@mkdir -p ~/.config/ranger
 	cp kitty/rc.conf ~/.config/ranger
 
-~/.config/rofi/base16-seti.rasi:
+~/.config/rofi:
+	mkdir ~/.config/rofi
+
+~/.config/rofi/base16-seti.rasi: ~/.config/rofi
 	@echo "Downloading base16-seti theme for Rofi..."
-	@mkdir -p ~/.config/rofi
 	curl -s https://gitlab.com/jordiorlando/base16-rofi/-/raw/master/themes/base16-seti.rasi > ~/.config/rofi/base16-seti.rasi
 
-~/.config/rofi/config.rasi:
+~/.config/rofi/config.rasi: ~/.config/rofi
 	@echo "Installing Rofi config..."
-	@mkdir -p ~/.config/rofi
 	cp rofi/config.rasi ~/.config/rofi/
 
 .PHONY: add_kitty
