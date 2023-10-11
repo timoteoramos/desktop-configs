@@ -40,6 +40,14 @@
 	@echo "Installing Rofi config..."
 	cp rofi/config.rasi ~/.config/rofi/
 
+~/.tmux.conf:
+	@echo "Installing tmux config..."
+	cp tmux/tmux.conf ~/.tmux.conf
+
+~/.tmux/plugins/tpm:
+	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+	@echo "Restart your tmux and run the installer by pressing <prefix> + I"
+
 .PHONY: add_kitty
 add_kitty: ~/.config/kitty/kitty.conf ~/.config/ranger/rc.conf
 
@@ -48,6 +56,9 @@ add_qutebrowser: ~/.config/qutebrowser/config.py
 
 .PHONY: add_rofi
 add_rofi: ~/.config/rofi/base16-seti.rasi ~/.config/rofi/config.rasi
+
+.PHONY: add_tmux
+add_tmux: ~/.tmux.conf ~/.tmux/plugins/tpm
 
 .PHONY: add_xresources
 add_xresources: ~/.Xresources
@@ -73,6 +84,12 @@ del_rofi:
 	rm -Rf ~/.config/rofi/base16-seti.rasi
 	rm -Rf ~/.config/rofi/config.rasi
 
+.PHONY: del_tmux
+del_tmux:
+	@echo "Removing tmux configuration"
+	rm -Rf ~/.tmux.conf
+	rm -Rf ~/.tmux/plugins/tpm
+
 .PHONY: del_xresources
 del_xresources:
 	@echo "Removing Xresources..."
@@ -84,8 +101,9 @@ del_zsh:
 	rm -Rf ~/.local/share/zinit
 
 .PHONY: install
-install: add_kitty add_qutebrowser add_rofi add_xresources add_zsh
+install: add_kitty add_qutebrowser add_rofi add_tmux add_xresources add_zsh
+	@echo "Notes for tmux: you can use <prefix> + I in order to complete the setup."
 	@echo "Notes for zsh: the setup will finish when you start a new zshell instance."
 
 .PHONY: clean
-clean: del_kitty del_qutebrowser del_rofi del_xresources del_zsh
+clean: del_kitty del_qutebrowser del_rofi del_tmux del_xresources del_zsh
