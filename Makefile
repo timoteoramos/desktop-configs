@@ -1,4 +1,7 @@
 .DEFAULT_GOAL := install
+EDITOR=vi
+ZSHPREFIX := /etc
+
 
 ~/.Xresources:
 	@echo "Installinx Xresources..."
@@ -67,6 +70,16 @@
 	@echo "Installing tmux system-wide config..."
 	cp system/tmux.conf /etc/tmux.conf
 
+$(ZSHPREFIX):
+	mkdir -p $(ZSHPREFIX)
+
+$(ZSHPREFIX)/zshenv: $(ZSHPREFIX)
+	cp system/zshenv.zsh $(ZSHPREFIX)/zshenv
+	sed -i 's/$$EDITOR/vi/g' $(ZSHPREFIX)/zshenv
+
+$(ZSHPREFIX)/zshrc: $(ZSHPREFIX)
+	cp system/zshrc.zsh $(ZSHPREFIX)/zshrc
+
 .PHONY: add_kitty
 add_kitty: ~/.config/kitty/kitty.conf ~/.config/ranger/rc.conf
 
@@ -124,6 +137,9 @@ sysadd_gtk: /etc/gtk-2.0/gtkrc /etc/gtk-3.0/settings.ini
 .PHONY: sysadd_tmux
 sysadd_tmux: /etc/tmux.conf
 
+.PHONY: sysadd_zsh
+sysadd_zsh: $(ZSHPREFIX)/zshenv $(ZSHPREFIX)/zshrc
+
 .PHONY: sysdel_gtk
 sysdel_gtk:
 	@echo "Removing GTK system-wide configuration..."
@@ -135,6 +151,12 @@ sysdel_tmux:
 	@echo "Removing tmux system-wide configuration..."
 	rm -Rf /etc/tmux.conf
 
+.PHONY: sysdel_zsh
+sysdel_zsh:
+	@echo "Removing zshell system-wide configuration..."
+	rm -Rf $(ZSHPREFIX)/zshenv
+	rm -Rf $(ZSHPREFIX)/zshrc
+
 .PHONY: install
 install: add_kitty add_qutebrowser add_rofi add_tmux add_xresources add_zsh
 	@echo "Notes for tmux: you can use <prefix> + I in order to complete the setup."
@@ -144,7 +166,7 @@ install: add_kitty add_qutebrowser add_rofi add_tmux add_xresources add_zsh
 clean: del_kitty del_qutebrowser del_rofi del_tmux del_xresources del_zsh
 
 .PHONY: sysinstall
-sysinstall: sysadd_gtk sysadd_tmux
+sysinstall: sysadd_gtk sysadd_tmux sysadd_zsh
 
 .PHONY: sysclean
-sysclean: sysdel_gtk sysdel_tmux
+sysclean: sysdel_gtk sysdel_tmux sysdel_zsh
