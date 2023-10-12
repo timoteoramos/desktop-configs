@@ -1,5 +1,6 @@
 .DEFAULT_GOAL := install
 EDITOR=vi
+QTILE_TERM := kitty
 ZSHPREFIX := /etc
 
 ~/.Xresources:
@@ -15,21 +16,33 @@ ZSHPREFIX := /etc
 	cp kitty/kitty.conf ~/.config/kitty/
 
 ~/.config/qutebrowser:
-	mkdir ~/.config/qutebrowser
+	mkdir -p ~/.config/qutebrowser
 
 ~/.config/qutebrowser/config.py: ~/.config/qutebrowser
 	@echo "Installing Qutebrowser config..."
 	cp qutebrowser/config.py ~/.config/qutebrowser/
 
+~/.config/qtile:
+	mkdir -p ~/.config/qtile
+
+~/.config/qtile/config.py: ~/.config/qtile
+	cp qtile/config.py ~/.config/qtile/
+
+~/.config/qtile/defaults.py: ~/.config/qtile
+	cp qtile/defaults.py ~/.config/qtile/
+
+~/.config/qtile/theme.py: ~/.config/qtile
+	cp qtile/theme.py ~/.config/qtile/
+
 ~/.config/ranger:
-	mkdir ~/.config/ranger
+	mkdir -p ~/.config/ranger
 
 ~/.config/ranger/rc.conf:
 	@echo "Installing ranger config..."
 	cp ranger/rc.conf ~/.config/ranger
 
 ~/.config/rofi:
-	mkdir ~/.config/rofi
+	mkdir -p ~/.config/rofi
 
 ~/.config/rofi/base16-seti.rasi: ~/.config/rofi
 	@echo "Downloading base16-seti theme for Rofi..."
@@ -85,6 +98,9 @@ add_kitty: ~/.config/kitty/kitty.conf
 .PHONY: add_qutebrowser
 add_qutebrowser: ~/.config/qutebrowser/config.py
 
+.PHONY: add_qtile
+add_qtile: ~/.config/qtile/config.py ~/.config/qtile/defaults.py ~/.config/qtile/theme.py
+
 .PHONY: add_ranger
 add_ranger: ~/.config/ranger/rc.conf
 
@@ -110,6 +126,11 @@ del_kitty:
 del_qutebrowser:
 	@echo "Removing Qutebrowser configuration"
 	rm -Rf ~/.config/qutebrowser/config.py
+
+.PHONY: del_qtile
+del_qtile:
+	rm -Rf ~/.config/qtile/config.py
+	rm -Rf ~/.config/qtile/theme.py
 
 .PHONY: del_ranger
 del_ranger:
@@ -165,12 +186,12 @@ sysdel_zsh:
 	rm -Rf $(ZSHPREFIX)/zshrc
 
 .PHONY: install
-install: add_kitty add_qutebrowser add_ranger add_rofi add_tmux add_xresources add_zsh
+install: add_kitty add_qutebrowser add_qtile add_ranger add_rofi add_tmux add_xresources add_zsh
 	@echo "Notes for tmux: you can use <prefix> + I in order to complete the setup."
 	@echo "Notes for zsh: the setup will finish when you start a new zshell instance."
 
 .PHONY: clean
-clean: del_kitty del_qutebrowser del_ranger del_rofi del_tmux del_xresources del_zsh
+clean: del_kitty del_qutebrowser del_qtile del_ranger del_rofi del_tmux del_xresources del_zsh
 
 .PHONY: sysinstall
 sysinstall: sysadd_gtk sysadd_tmux sysadd_zsh
