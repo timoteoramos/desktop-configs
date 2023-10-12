@@ -8,6 +8,12 @@ ZSHPREFIX := /etc
 	cp xresources/Xresources ~/.Xresources
 	xrdb ~/.Xresources
 
+~/.config/dunst:
+	mkdir -p ~/.config/dunst
+
+~/.config/dunst/dunstrc: ~/.config/dunst
+	cp dunst/dunstrc.ini ~/.config/dunst/dunstrc
+
 ~/.config/kitty:
 	mkdir -p ~/.config/kitty
 
@@ -92,6 +98,9 @@ $(ZSHPREFIX)/zshenv: $(ZSHPREFIX)
 $(ZSHPREFIX)/zshrc: $(ZSHPREFIX)
 	cp system/zshrc.zsh $(ZSHPREFIX)/zshrc
 
+.PHONY: add_dust
+add_dunst: ~/.config/dunst/dunstrc
+
 .PHONY: add_kitty
 add_kitty: ~/.config/kitty/kitty.conf
 
@@ -115,6 +124,10 @@ add_xresources: ~/.Xresources
 
 .PHONY: add_zsh
 add_zsh: ~/.zshrc
+
+.PHONY: del_dunst
+del_dunst:
+	rm -Rf ~/.config/dunst/dunstrc
 
 .PHONY: del_kitty
 del_kitty:
@@ -186,12 +199,12 @@ sysdel_zsh:
 	rm -Rf $(ZSHPREFIX)/zshrc
 
 .PHONY: install
-install: add_kitty add_qutebrowser add_qtile add_ranger add_rofi add_tmux add_xresources add_zsh
+install: add_dunst add_kitty add_qutebrowser add_qtile add_ranger add_rofi add_tmux add_xresources add_zsh
 	@echo "Notes for tmux: you can use <prefix> + I in order to complete the setup."
 	@echo "Notes for zsh: the setup will finish when you start a new zshell instance."
 
 .PHONY: clean
-clean: del_kitty del_qutebrowser del_qtile del_ranger del_rofi del_tmux del_xresources del_zsh
+clean: del_dunst del_kitty del_qutebrowser del_qtile del_ranger del_rofi del_tmux del_xresources del_zsh
 
 .PHONY: sysinstall
 sysinstall: sysadd_gtk sysadd_tmux sysadd_zsh
