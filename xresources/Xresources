@@ -60,3 +60,10 @@ URxvt.font: xft:MesloLGS Nerd Font:size=10
 ! xterm
 xterm*faceName: MesloLGS Nerd Font
 xterm*faceSize: 10
+
+! xst
+st.borderpx: 0
+st.cursorshape: 1
+st.font: MesloLGS Nerd Font Mono:pixelsize=10:antialias=true:autohint=true;
+st.termname: xterm-256color
+st.shell: zsh
