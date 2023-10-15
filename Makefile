@@ -88,6 +88,14 @@ ZSHPREFIX := /etc
 	@echo "Installing tmux system-wide config..."
 	cp system/tmux.conf /etc/tmux.conf
 
+/usr/local/share/fonts/Meslo:
+	mkdir -p /usr/local/share/fonts/Meslo
+
+/usr/local/share/fonts/Meslo/Meslo\ LG\ S\ Regular\ Nerd\ Font\ Complete.ttf: /usr/local/share/fonts/Meslo
+	wget -O /root/Meslo.zip https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/Meslo.zip
+	unzip -d /usr/local/share/fonts/Meslo /root/Meslo.zip
+
+
 $(ZSHPREFIX):
 	mkdir -p $(ZSHPREFIX)
 
@@ -175,6 +183,10 @@ del_zsh:
 .PHONY: sysadd_gtk
 sysadd_gtk: /etc/gtk-2.0/gtkrc /etc/gtk-3.0/settings.ini
 
+.PHONY: sysadd_nerdfont
+sysadd_nerdfont: /usr/local/share/fonts/Meslo/Meslo\ LG\ S\ Regular\ Nerd\ Font\ Complete.ttf
+	fc-cache -fv
+
 .PHONY: sysadd_tmux
 sysadd_tmux: /etc/tmux.conf
 
@@ -186,6 +198,10 @@ sysdel_gtk:
 	@echo "Removing GTK system-wide configuration..."
 	rm -Rf /etc/gtk-2.0/gtkrc
 	rm -Rf /etc/gtk-3.0/settings.ini
+
+.PHONY: sysdel_nerdfont
+sysdel_nerdfont:
+	rm -Rf /usr/local/share/fonts/Meslo
 
 .PHONY: sysdel_tmux
 sysdel_tmux:
@@ -207,7 +223,7 @@ install: add_dunst add_kitty add_qutebrowser add_qtile add_ranger add_rofi add_t
 clean: del_dunst del_kitty del_qutebrowser del_qtile del_ranger del_rofi del_tmux del_xresources del_zsh
 
 .PHONY: sysinstall
-sysinstall: sysadd_gtk sysadd_tmux sysadd_zsh
+sysinstall: sysadd_gtk sysadd_nerdfont sysadd_tmux sysadd_zsh
 
 .PHONY: sysclean
-sysclean: sysdel_gtk sysdel_tmux sysdel_zsh
+sysclean: sysdel_gtk sysdel_nerdfont sysdel_tmux sysdel_zsh
