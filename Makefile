@@ -1,7 +1,6 @@
 .DEFAULT_GOAL := install
 EDITOR=vi
 QTILE_TERM := kitty
-ZSHPREFIX := /etc
 
 ~/.Xresources:
 	@echo "Installinx Xresources..."
@@ -69,42 +68,6 @@ ZSHPREFIX := /etc
 ~/.zshrc:
 	@echo "Installing zshrc config..."
 	cp zsh/zshrc.zsh ~/.zshrc
-
-/etc/gtk-2.0:
-	mkdir -p /etc/gtk-2.0
-
-/etc/gtk-2.0/gtkrc: /etc/gtk-2.0
-	@echo "Installing GTK2 system-wide config..."
-	cp system/gtkrc /etc/gtk-2.0/
-
-/etc/gtk-3.0:
-	mkdir -p /etc/gtk-3.0
-
-/etc/gtk-3.0/settings.ini: /etc/gtk-3.0
-	@echo "Installing GTK3 system-wide config..."
-	cp system/settings.ini /etc/gtk-3.0/
-
-/etc/tmux.conf:
-	@echo "Installing tmux system-wide config..."
-	cp system/tmux.conf /etc/tmux.conf
-
-/usr/local/share/fonts/Meslo:
-	mkdir -p /usr/local/share/fonts/Meslo
-
-/usr/local/share/fonts/Meslo/Meslo\ LG\ S\ Regular\ Nerd\ Font\ Complete.ttf: /usr/local/share/fonts/Meslo
-	wget -O /root/Meslo.zip https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/Meslo.zip
-	unzip -d /usr/local/share/fonts/Meslo /root/Meslo.zip
-
-
-$(ZSHPREFIX):
-	mkdir -p $(ZSHPREFIX)
-
-$(ZSHPREFIX)/zshenv: $(ZSHPREFIX)
-	cp system/zshenv.zsh $(ZSHPREFIX)/zshenv
-	sed -i 's/$$EDITOR/vi/g' $(ZSHPREFIX)/zshenv
-
-$(ZSHPREFIX)/zshrc: $(ZSHPREFIX)
-	cp system/zshrc.zsh $(ZSHPREFIX)/zshrc
 
 .PHONY: add_dust
 add_dunst: ~/.config/dunst/dunstrc
@@ -188,40 +151,6 @@ del_zsh:
 	rm -Rf ~/.zshrc
 	rm -Rf ~/.local/share/zinit
 
-.PHONY: sysadd_gtk
-sysadd_gtk: /etc/gtk-2.0/gtkrc /etc/gtk-3.0/settings.ini
-
-.PHONY: sysadd_nerdfont
-sysadd_nerdfont: /usr/local/share/fonts/Meslo/Meslo\ LG\ S\ Regular\ Nerd\ Font\ Complete.ttf
-	fc-cache -fv
-
-.PHONY: sysadd_tmux
-sysadd_tmux: /etc/tmux.conf
-
-.PHONY: sysadd_zsh
-sysadd_zsh: $(ZSHPREFIX)/zshenv $(ZSHPREFIX)/zshrc
-
-.PHONY: sysdel_gtk
-sysdel_gtk:
-	@echo "Removing GTK system-wide configuration..."
-	rm -Rf /etc/gtk-2.0/gtkrc
-	rm -Rf /etc/gtk-3.0/settings.ini
-
-.PHONY: sysdel_nerdfont
-sysdel_nerdfont:
-	rm -Rf /usr/local/share/fonts/Meslo
-
-.PHONY: sysdel_tmux
-sysdel_tmux:
-	@echo "Removing tmux system-wide configuration..."
-	rm -Rf /etc/tmux.conf
-
-.PHONY: sysdel_zsh
-sysdel_zsh:
-	@echo "Removing zshell system-wide configuration..."
-	rm -Rf $(ZSHPREFIX)/zshenv
-	rm -Rf $(ZSHPREFIX)/zshrc
-
 .PHONY: install
 install: add_dunst add_kitty add_neovim add_qutebrowser add_qtile add_ranger add_rofi add_tmux add_xresources add_zsh
 	@echo "Notes for tmux: you can use <prefix> + I in order to complete the setup."
@@ -231,7 +160,9 @@ install: add_dunst add_kitty add_neovim add_qutebrowser add_qtile add_ranger add
 clean: del_dunst del_kitty del_neovim del_qutebrowser del_qtile del_ranger del_rofi del_tmux del_xresources del_zsh
 
 .PHONY: sysinstall
-sysinstall: sysadd_gtk sysadd_nerdfont sysadd_tmux sysadd_zsh
+sysinstall:
+	cd system ; make install
 
 .PHONY: sysclean
-sysclean: sysdel_gtk sysdel_nerdfont sysdel_tmux sysdel_zsh
+sysclean:
+	cd system ; make clean
