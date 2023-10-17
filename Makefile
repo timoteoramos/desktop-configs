@@ -187,6 +187,7 @@ setup_archlinux:
 		dunst \
 		elementary-icon-theme \
 		firefox-i18n-pt-br \
+		gcc \
 		git \
 		gvfs-afc \
 		gvfs-gphoto2 \
