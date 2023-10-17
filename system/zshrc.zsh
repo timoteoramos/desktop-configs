@@ -111,3 +111,5 @@ if (( ${${(@f)"$(</etc/os-release)"}[(I)ID*=*ubuntu]} )) &&
   autoload -U compinit
   compinit
 fi
+
+[ "$TERM" = "xterm-kitty" ] && alias ssh="kitty +kitten ssh"
