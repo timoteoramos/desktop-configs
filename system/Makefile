@@ -5,18 +5,15 @@ ZSHPREFIX := /etc
 	mkdir -p /etc/gtk-2.0
 
 /etc/gtk-2.0/gtkrc: /etc/gtk-2.0
-	@echo "Installing GTK2 system-wide config..."
 	cp gtkrc /etc/gtk-2.0/
 
 /etc/gtk-3.0:
 	mkdir -p /etc/gtk-3.0
 
 /etc/gtk-3.0/settings.ini: /etc/gtk-3.0
-	@echo "Installing GTK3 system-wide config..."
 	cp settings.ini /etc/gtk-3.0/
 
 /etc/tmux.conf:
-	@echo "Installing tmux system-wide config..."
 	cp tmux.conf /etc/tmux.conf
 
 /usr/local/share/fonts/Meslo:
@@ -52,7 +49,6 @@ add_zsh: $(ZSHPREFIX)/zshenv $(ZSHPREFIX)/zshrc
 
 .PHONY: del_gtk
 del_gtk:
-	@echo "Removing GTK tem-wide configuration..."
 	rm -Rf /etc/gtk-2.0/gtkrc
 	rm -Rf /etc/gtk-3.0/settings.ini
 
@@ -62,12 +58,10 @@ del_nerdfont:
 
 .PHONY: del_tmux
 del_tmux:
-	@echo "Removing tmux tem-wide configuration..."
 	rm -Rf /etc/tmux.conf
 
 .PHONY: del_zsh
 del_zsh:
-	@echo "Removing zshell tem-wide configuration..."
 	rm -Rf $(ZSHPREFIX)/zshenv
 	rm -Rf $(ZSHPREFIX)/zshrc
 

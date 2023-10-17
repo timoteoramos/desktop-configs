@@ -3,7 +3,6 @@ EDITOR=vi
 QTILE_TERM := kitty
 
 ~/.Xresources:
-	@echo "Installinx Xresources..."
 	cp xresources/Xresources ~/.Xresources
 	xrdb ~/.Xresources
 
@@ -17,14 +16,12 @@ QTILE_TERM := kitty
 	mkdir -p ~/.config/kitty
 
 ~/.config/kitty/kitty.conf: ~/.config/kitty
-	@echo "Installing Kitty config..."
 	cp kitty/kitty.conf ~/.config/kitty/
 
 ~/.config/qutebrowser:
 	mkdir -p ~/.config/qutebrowser
 
 ~/.config/qutebrowser/config.py: ~/.config/qutebrowser
-	@echo "Installing Qutebrowser config..."
 	cp qutebrowser/config.py ~/.config/qutebrowser/
 
 ~/.config/qtile:
@@ -43,22 +40,18 @@ QTILE_TERM := kitty
 	mkdir -p ~/.config/ranger
 
 ~/.config/ranger/rc.conf:
-	@echo "Installing ranger config..."
 	cp ranger/rc.conf ~/.config/ranger
 
 ~/.config/rofi:
 	mkdir -p ~/.config/rofi
 
 ~/.config/rofi/base16-seti.rasi: ~/.config/rofi
-	@echo "Downloading base16-seti theme for Rofi..."
 	curl -s https://gitlab.com/jordiorlando/base16-rofi/-/raw/master/themes/base16-seti.rasi > ~/.config/rofi/base16-seti.rasi
 
 ~/.config/rofi/config.rasi: ~/.config/rofi
-	@echo "Installing Rofi config..."
 	cp rofi/config.rasi ~/.config/rofi/
 
 ~/.tmux.conf:
-	@echo "Installing tmux config..."
 	cp tmux/tmux.conf ~/.tmux.conf
 
 ~/.tmux/plugins/tpm:
@@ -66,7 +59,6 @@ QTILE_TERM := kitty
 	@echo "Restart your tmux and run the installer by pressing <prefix> + I"
 
 ~/.zshrc:
-	@echo "Installing zshrc config..."
 	cp zsh/zshrc.zsh ~/.zshrc
 
 .PHONY: add_dust
@@ -106,7 +98,6 @@ del_dunst:
 
 .PHONY: del_kitty
 del_kitty:
-	@echo "Removing Kitty and Ranger configurations"
 	rm -Rf ~/.config/kitty/kitty.conf
 	rm -Rf ~/.config/ranger/rc.conf
 
@@ -116,7 +107,6 @@ del_neovim:
 
 .PHONY: del_qutebrowser
 del_qutebrowser:
-	@echo "Removing Qutebrowser configuration"
 	rm -Rf ~/.config/qutebrowser/config.py
 
 .PHONY: del_qtile
@@ -126,24 +116,20 @@ del_qtile:
 
 .PHONY: del_ranger
 del_ranger:
-	@echo "Removing ranger configuration"
 	rm -Rf ~/.config/ranger/rc.conf
 
 .PHONY: del_rofi
 del_rofi:
-	@echo "Removing Rofi configuration"
 	rm -Rf ~/.config/rofi/base16-seti.rasi
 	rm -Rf ~/.config/rofi/config.rasi
 
 .PHONY: del_tmux
 del_tmux:
-	@echo "Removing tmux configuration"
 	rm -Rf ~/.tmux.conf
 	rm -Rf ~/.tmux/plugins/tpm
 
 .PHONY: del_xresources
 del_xresources:
-	@echo "Removing Xresources..."
 	rm -Rf ~/.Xresources
 
 .PHONY: del_zsh
