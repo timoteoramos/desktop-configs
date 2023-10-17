@@ -6,18 +6,18 @@ ZSHPREFIX := /etc
 
 /etc/gtk-2.0/gtkrc: /etc/gtk-2.0
 	@echo "Installing GTK2 system-wide config..."
-	cp system/gtkrc /etc/gtk-2.0/
+	cp gtkrc /etc/gtk-2.0/
 
 /etc/gtk-3.0:
 	mkdir -p /etc/gtk-3.0
 
 /etc/gtk-3.0/settings.ini: /etc/gtk-3.0
 	@echo "Installing GTK3 system-wide config..."
-	cp system/settings.ini /etc/gtk-3.0/
+	cp settings.ini /etc/gtk-3.0/
 
 /etc/tmux.conf:
 	@echo "Installing tmux system-wide config..."
-	cp system/tmux.conf /etc/tmux.conf
+	cp tmux.conf /etc/tmux.conf
 
 /usr/local/share/fonts/Meslo:
 	mkdir -p /usr/local/share/fonts/Meslo
@@ -31,11 +31,11 @@ $(ZSHPREFIX):
 	mkdir -p $(ZSHPREFIX)
 
 $(ZSHPREFIX)/zshenv: $(ZSHPREFIX)
-	cp system/zshenv.zsh $(ZSHPREFIX)/zshenv
+	cp zshenv.zsh $(ZSHPREFIX)/zshenv
 	sed -i 's/$$EDITOR/vi/g' $(ZSHPREFIX)/zshenv
 
 $(ZSHPREFIX)/zshrc: $(ZSHPREFIX)
-	cp system/zshrc.zsh $(ZSHPREFIX)/zshrc
+	cp zshrc.zsh $(ZSHPREFIX)/zshrc
 
 .PHONY: add_gtk
 add_gtk: /etc/gtk-2.0/gtkrc /etc/gtk-3.0/settings.ini
