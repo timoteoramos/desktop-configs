@@ -1,4 +1,7 @@
 .DEFAULT_GOAL := install
+SYSTEM_KEYMAP := br-abnt2
+SYSTEM_LOCALE := pt_BR.UTF-8
+SYSTEM_TIMEZONE := America/Araguaina
 ZSHPREFIX := /etc
 
 /etc/gtk-2.0:
@@ -70,3 +73,73 @@ install: add_gtk add_nerdfont add_tmux add_zsh
 
 .PHONY: clean
 clean: del_gtk del_nerdfont del_tmux del_zsh
+
+.PHONY: setup_archlinux
+setup_archlinux:
+	ln -sf /usr/share/zoneinfo/$(SYSTEM_TIMEZONE) /etc/localtime
+	hwclock --systohc
+	echo "$(SYSTEM_LOCALE)" > /etc/locale.gen
+	locale-gen
+	echo "LANG=$(SYSTEM_LOCALE)" > /etc/locale.conf
+	echo "KEYMAP=$(SYSTEM_KEYMAP)" > /etc/vconsole.conf
+	pacman -Sy lightdm-gtk-greeter-settings
+	systemctl set-default graphical.target
+	systemctl enable lightdm.service
+	pacman -Sy \
+		accountsservice \
+		alacritty \
+		caja \
+		chromium \
+		curl \
+		dialog \
+		dunst \
+		elementary-icon-theme \
+		firefox-i18n-pt-br \
+		gcc \
+		git \
+		gvfs-afc \
+		gvfs-gphoto2 \
+		gvfs-mtp \
+		gvfs-nfs \
+		gvfs-smb \
+		htop \
+		ibus \
+		jq \
+		keepassxc \
+		light-locker \
+		mate-polkit \
+		mate-themes \
+		mosh \
+		neovim \
+		noto-fonts \
+		noto-fonts-emoji \
+		noto-fonts-extra \
+		p7zip \
+		pipewire-alsa \
+		pipewire-audio \
+		pipewire-jack \
+		pipewire-pulse \
+		pv \
+		python-dbus-next \
+		python-pipx \
+		python-pynvim \
+		python-pyxdg \
+		qtile \
+		ranger \
+		rofi \
+		seahorse \
+		sudo \
+		sysstat \
+		thunderbird-i18n-pt-br \
+		tmux \
+		unzip \
+		wget \
+		wireplumber \
+		xorg-fonts-100dpi \
+		xorg-fonts-75dpi \
+		xorg-fonts-cyrillic \
+		xorg-fonts-encodings \
+		xorg-fonts-misc \
+		xorg-fonts-type1 \
+		zip \
+		zsh
