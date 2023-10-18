@@ -1,22 +1,22 @@
 .DEFAULT_GOAL := install
 EDITOR=vi
-QTILE_TERM := kitty
+QTILE_TERM := alacritty
 
 ~/.Xresources:
 	cp xresources/Xresources ~/.Xresources
 	xrdb ~/.Xresources
+
+~/.config/alacritty:
+	mkdir -p ~/.config/alacritty
+
+~/.config/alacritty/alacritty.yml: ~/.config/alacritty
+	cp alacritty/alacritty.yml ~/.config/alacritty/
 
 ~/.config/dunst:
 	mkdir -p ~/.config/dunst
 
 ~/.config/dunst/dunstrc: ~/.config/dunst
 	cp dunst/dunstrc.ini ~/.config/dunst/dunstrc
-
-~/.config/kitty:
-	mkdir -p ~/.config/kitty
-
-~/.config/kitty/kitty.conf: ~/.config/kitty
-	cp kitty/kitty.conf ~/.config/kitty/
 
 ~/.config/qutebrowser:
 	mkdir -p ~/.config/qutebrowser
@@ -61,11 +61,11 @@ QTILE_TERM := kitty
 ~/.zshrc:
 	cp zsh/zshrc.zsh ~/.zshrc
 
+.PHONY: add_alacritty
+add_alacritty: ~/.config/alacritty/alacritty.yml
+
 .PHONY: add_dust
 add_dunst: ~/.config/dunst/dunstrc
-
-.PHONY: add_kitty
-add_kitty: ~/.config/kitty/kitty.conf
 
 .PHONY: add_neovim
 add_neovim:
@@ -92,14 +92,13 @@ add_xresources: ~/.Xresources
 .PHONY: add_zsh
 add_zsh: ~/.zshrc
 
+.PHONY: del_alacritty
+del_alacritty:
+	rm -Rf ~/.config/alacritty/alacritty.yml
+
 .PHONY: del_dunst
 del_dunst:
 	rm -Rf ~/.config/dunst/dunstrc
-
-.PHONY: del_kitty
-del_kitty:
-	rm -Rf ~/.config/kitty/kitty.conf
-	rm -Rf ~/.config/ranger/rc.conf
 
 .PHONY: del_neovim
 del_neovim:
@@ -138,12 +137,12 @@ del_zsh:
 	rm -Rf ~/.local/share/zinit
 
 .PHONY: install
-install: add_dunst add_kitty add_neovim add_qutebrowser add_qtile add_ranger add_rofi add_tmux add_xresources add_zsh
+install: add_alacritty add_dunst add_neovim add_qutebrowser add_qtile add_ranger add_rofi add_tmux add_xresources add_zsh
 	@echo "Notes for tmux: you can use <prefix> + I in order to complete the setup."
 	@echo "Notes for zsh: the setup will finish when you start a new zshell instance."
 
 .PHONY: clean
-clean: del_dunst del_kitty del_neovim del_qutebrowser del_qtile del_ranger del_rofi del_tmux del_xresources del_zsh
+clean: del_alacritty del_dunst del_neovim del_qutebrowser del_qtile del_ranger del_rofi del_tmux del_xresources del_zsh
 
 .PHONY: sysinstall
 sysinstall:
@@ -166,6 +165,7 @@ setup_archlinux:
 	systemctl enable lightdm.service
 	pacman -Sy \
 		accountsservice \
+		alacritty \
 		caja \
 		chromium \
 		curl \
@@ -184,7 +184,6 @@ setup_archlinux:
 		ibus \
 		jq \
 		keepassxc \
-		kitty \
 		light-locker \
 		mate-polkit \
 		mate-themes \
@@ -200,7 +199,6 @@ setup_archlinux:
 		pipewire-pulse \
 		pv \
 		python-dbus-next \
-		python-pillow \
 		python-pipx \
 		python-pynvim \
 		python-pyxdg \

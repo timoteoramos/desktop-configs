@@ -8,4 +8,4 @@
 ## Dependencies
 
 - [Rofi](https://davatorium.github.io/rofi/)
-- [Kitty](https://sw.kovidgoyal.net/kitty/)
+- [Alacritty](https://alacritty.org/)

@@ -1,4 +1,4 @@
-terminal = 'kitty'
+terminal = 'alacritty'
 
 startup_apps = [
     ['/usr/bin/ibus-daemon', '-rxR'],
