@@ -57,7 +57,7 @@ font:
   bold_italic:
     family: MesloLGS Nerd Font
     style: Bold Italic
-  size: 7.0
+  size: 10
 
 window:
   opacity: 0.9

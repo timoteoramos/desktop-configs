@@ -54,6 +54,9 @@
 *color20:      base04
 *color21:      base06
 
+! Alacritty scaling
+Xft.dpi: 96
+
 ! rxvt-unicode
 URxvt.font: xft:MesloLGS Nerd Font:size=10
 
