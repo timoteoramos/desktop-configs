@@ -1,9 +1,9 @@
 configuration {
   disable-history: false;
-  display-drun: "   Apps ";
-  display-Network: " 󰤨  Network";
-  display-run: "   Run ";
-  display-window: " 﩯  Window";
+  display-drun: "󰣆  Apps";
+  display-Network: "󰖩  Network";
+  display-run: "󱓞  Run";
+  display-window: "󱂬  Window";
   drun-display-format: "{icon} {name}";
   hide-scrollbar: true;
   location: 0;
