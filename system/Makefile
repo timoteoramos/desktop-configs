@@ -22,12 +22,12 @@ ZSHPREFIX := /etc
 /etc/tmux.conf:
 	cp tmux.conf /etc/tmux.conf
 
-/usr/local/share/fonts/Meslo:
-	mkdir -p /usr/local/share/fonts/Meslo
+/usr/local/share/fonts/JetBrainsMono:
+	mkdir -p /usr/local/share/fonts/JetBrainsMono
 
-/usr/local/share/fonts/Meslo/Meslo\ LG\ S\ Regular\ Nerd\ Font\ Complete.ttf: /usr/local/share/fonts/Meslo
-	wget -O /root/Meslo.zip https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/Meslo.zip
-	unzip -d /usr/local/share/fonts/Meslo /root/Meslo.zip
+/usr/local/share/fonts/JetBrainsMono/JetBrainsMonoNerdFont-Medium.ttf: /usr/local/share/fonts/Meslo
+	wget -O /root/JetBrainsMono.zip https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/JetBrainsMono.zip
+	unzip -d /usr/local/share/fonts/JetBrainsMono /root/JetBrainsMono.zip
 
 
 $(ZSHPREFIX):
@@ -44,8 +44,8 @@ $(ZSHPREFIX)/zshrc: $(ZSHPREFIX)
 add_gtk: /etc/gtk-2.0/gtkrc /etc/gtk-3.0/settings.ini
 
 .PHONY: add_nerdfont
-add_nerdfont: /usr/local/share/fonts/Meslo/Meslo\ LG\ S\ Regular\ Nerd\ Font\ Complete.ttf
-	fc-cache -fv
+add_nerdfont: /usr/local/share/fonts/JetBrainsMono/JetBrainsMonoNerdFont-Medium.ttf
+	fc-cache -fsv
 
 .PHONY: add_tmux
 add_tmux: /etc/tmux.conf
@@ -60,7 +60,7 @@ del_gtk:
 
 .PHONY: del_nerdfont
 del_nerdfont:
-	rm -Rf /usr/local/share/fonts/Meslo
+	rm -Rf /usr/local/share/fonts/JetBrainsMono
 
 .PHONY: del_tmux
 del_tmux:
