@@ -52,20 +52,20 @@ QTILE_TERM := alacritty
 	mkdir -p ~/.local/share/rofi/themes
 
 ~/.local/share/rofi/themes/catppuccin-frappe.rasi: ~/.local/share/rofi/themes
-	curl -s https://raw.githubusercontent.com/catppuccin/rofi/main/basic/.local/share/rofi/themes/catppuccin-frappe.rasi > ~/.config/rofi/catppuccin-frappe.rasi
-	sed -i 's/JetBrainsMono Nerd Font/MesloLGS Nerd Font/g' ~/.config/rofi/catppuccin-frappe.rasi
+	curl -s https://raw.githubusercontent.com/catppuccin/rofi/main/basic/.local/share/rofi/themes/catppuccin-frappe.rasi > ~/.local/share/rofi/themes/catppuccin-frappe.rasi
+	sed -i 's/JetBrainsMono Nerd Font/MesloLGS Nerd Font/g' ~/.local/share/rofi/themes/catppuccin-frappe.rasi
 
 ~/.local/share/rofi/themes/catppuccin-latte.rasi: ~/.local/share/rofi/themes
-	curl -s https://raw.githubusercontent.com/catppuccin/rofi/main/basic/.local/share/rofi/themes/catppuccin-latte.rasi > ~/.config/rofi/catppuccin-latte.rasi
-	sed -i 's/JetBrainsMono Nerd Font/MesloLGS Nerd Font/g' ~/.config/rofi/catppuccin-latte.rasi
+	curl -s https://raw.githubusercontent.com/catppuccin/rofi/main/basic/.local/share/rofi/themes/catppuccin-latte.rasi > ~/.local/share/rofi/themes/catppuccin-latte.rasi
+	sed -i 's/JetBrainsMono Nerd Font/MesloLGS Nerd Font/g' ~/.local/share/rofi/themes/catppuccin-latte.rasi
 
 ~/.local/share/rofi/themes/catppuccin-macchiato.rasi: ~/.local/share/rofi/themes
-	curl -s https://raw.githubusercontent.com/catppuccin/rofi/main/basic/.local/share/rofi/themes/catppuccin-macchiato.rasi > ~/.config/rofi/catppuccin-macchiato.rasi
-	sed -i 's/JetBrainsMono Nerd Font/MesloLGS Nerd Font/g' ~/.config/rofi/catppuccin-macchiato.rasi
+	curl -s https://raw.githubusercontent.com/catppuccin/rofi/main/basic/.local/share/rofi/themes/catppuccin-macchiato.rasi > ~/.local/share/rofi/themes/catppuccin-macchiato.rasi
+	sed -i 's/JetBrainsMono Nerd Font/MesloLGS Nerd Font/g' ~/.local/share/rofi/themes/catppuccin-macchiato.rasi
 
 ~/.local/share/rofi/themes/catppuccin-mocha.rasi: ~/.local/share/rofi/themes
-	curl -s https://raw.githubusercontent.com/catppuccin/rofi/main/basic/.local/share/rofi/themes/catppuccin-mocha.rasi > ~/.config/rofi/catppuccin-mocha.rasi
-	sed -i 's/JetBrainsMono Nerd Font/MesloLGS Nerd Font/g' ~/.config/rofi/catppuccin-mocha.rasi
+	curl -s https://raw.githubusercontent.com/catppuccin/rofi/main/basic/.local/share/rofi/themes/catppuccin-mocha.rasi > ~/.local/share/rofi/themes/catppuccin-mocha.rasi
+	sed -i 's/JetBrainsMono Nerd Font/MesloLGS Nerd Font/g' ~/.local/share/rofi/themes/catppuccin-mocha.rasi
 
 ~/.tmux.conf:
 	cp tmux/tmux.conf ~/.tmux.conf
