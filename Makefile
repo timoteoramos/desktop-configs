@@ -53,19 +53,15 @@ QTILE_TERM := alacritty
 
 ~/.local/share/rofi/themes/catppuccin-frappe.rasi: ~/.local/share/rofi/themes
 	curl -s https://raw.githubusercontent.com/catppuccin/rofi/main/basic/.local/share/rofi/themes/catppuccin-frappe.rasi > ~/.local/share/rofi/themes/catppuccin-frappe.rasi
-	sed -i 's/JetBrainsMono Nerd Font/MesloLGS Nerd Font/g' ~/.local/share/rofi/themes/catppuccin-frappe.rasi
 
 ~/.local/share/rofi/themes/catppuccin-latte.rasi: ~/.local/share/rofi/themes
 	curl -s https://raw.githubusercontent.com/catppuccin/rofi/main/basic/.local/share/rofi/themes/catppuccin-latte.rasi > ~/.local/share/rofi/themes/catppuccin-latte.rasi
-	sed -i 's/JetBrainsMono Nerd Font/MesloLGS Nerd Font/g' ~/.local/share/rofi/themes/catppuccin-latte.rasi
 
 ~/.local/share/rofi/themes/catppuccin-macchiato.rasi: ~/.local/share/rofi/themes
 	curl -s https://raw.githubusercontent.com/catppuccin/rofi/main/basic/.local/share/rofi/themes/catppuccin-macchiato.rasi > ~/.local/share/rofi/themes/catppuccin-macchiato.rasi
-	sed -i 's/JetBrainsMono Nerd Font/MesloLGS Nerd Font/g' ~/.local/share/rofi/themes/catppuccin-macchiato.rasi
 
 ~/.local/share/rofi/themes/catppuccin-mocha.rasi: ~/.local/share/rofi/themes
 	curl -s https://raw.githubusercontent.com/catppuccin/rofi/main/basic/.local/share/rofi/themes/catppuccin-mocha.rasi > ~/.local/share/rofi/themes/catppuccin-mocha.rasi
-	sed -i 's/JetBrainsMono Nerd Font/MesloLGS Nerd Font/g' ~/.local/share/rofi/themes/catppuccin-mocha.rasi
 
 ~/.tmux.conf:
 	cp tmux/tmux.conf ~/.tmux.conf
