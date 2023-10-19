@@ -127,6 +127,7 @@ setup_archlinux:
 		pv \
 		python-dbus-next \
 		python-pipx \
+		python-psutil \
 		python-pynvim \
 		python-pyxdg \
 		qtile \
