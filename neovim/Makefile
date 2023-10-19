@@ -52,4 +52,3 @@ install: \
 .PHONY: clean
 clean:
 	rm -Rf ~/.config/nvim
-	rm -Rf ~/.local/share/nvim
