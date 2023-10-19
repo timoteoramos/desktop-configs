@@ -94,11 +94,13 @@ setup_archlinux:
 		alacritty \
 		caja \
 		chromium \
+		copyq \
 		curl \
 		dialog \
 		dunst \
 		elementary-icon-theme \
 		firefox-i18n-pt-br \
+		fzf \
 		gcc \
 		git \
 		gvfs-afc \
@@ -151,3 +153,4 @@ setup_archlinux:
 		xorg-fonts-type1 \
 		zip \
 		zsh
+	systemctl enable sysstat
