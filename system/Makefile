@@ -92,13 +92,17 @@ setup_archlinux:
 	pacman -Sy \
 		accountsservice \
 		alacritty \
+		atril \
 		caja \
 		chromium \
 		copyq \
+		cpio \
 		curl \
 		dialog \
 		dunst \
 		elementary-icon-theme \
+		engrampa \
+		eom \
 		firefox-i18n-pt-br \
 		fzf \
 		gcc \
@@ -136,11 +140,14 @@ setup_archlinux:
 		qtile \
 		ranger \
 		rofi \
+		rpm-tools \
 		seahorse \
 		sudo \
 		sysstat \
 		thunderbird-i18n-pt-br \
 		tmux \
+		unace \
+		unrar \
 		unzip \
 		volumeicon \
 		wget \
