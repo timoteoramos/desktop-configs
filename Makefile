@@ -45,11 +45,27 @@ QTILE_TERM := alacritty
 ~/.config/rofi:
 	mkdir -p ~/.config/rofi
 
-~/.config/rofi/base16-seti.rasi: ~/.config/rofi
-	curl -s https://gitlab.com/jordiorlando/base16-rofi/-/raw/master/themes/base16-seti.rasi > ~/.config/rofi/base16-seti.rasi
-
 ~/.config/rofi/config.rasi: ~/.config/rofi
 	cp rofi/config.rasi ~/.config/rofi/
+
+~/.local/share/rofi/themes:
+	mkdir -p ~/.local/share/rofi/themes
+
+~/.local/share/rofi/themes/catppuccin-frappe.rasi: ~/.local/share/rofi/themes
+	curl -s https://raw.githubusercontent.com/catppuccin/rofi/main/basic/.local/share/rofi/themes/catppuccin-frappe.rasi > ~/.config/rofi/catppuccin-frappe.rasi
+	sed -i 's/JetBrainsMono Nerd Font/MesloLGS Nerd Font/g' ~/.config/rofi/catppuccin-frappe.rasi
+
+~/.local/share/rofi/themes/catppuccin-latte.rasi: ~/.local/share/rofi/themes
+	curl -s https://raw.githubusercontent.com/catppuccin/rofi/main/basic/.local/share/rofi/themes/catppuccin-latte.rasi > ~/.config/rofi/catppuccin-latte.rasi
+	sed -i 's/JetBrainsMono Nerd Font/MesloLGS Nerd Font/g' ~/.config/rofi/catppuccin-latte.rasi
+
+~/.local/share/rofi/themes/catppuccin-macchiato.rasi: ~/.local/share/rofi/themes
+	curl -s https://raw.githubusercontent.com/catppuccin/rofi/main/basic/.local/share/rofi/themes/catppuccin-macchiato.rasi > ~/.config/rofi/catppuccin-macchiato.rasi
+	sed -i 's/JetBrainsMono Nerd Font/MesloLGS Nerd Font/g' ~/.config/rofi/catppuccin-macchiato.rasi
+
+~/.local/share/rofi/themes/catppuccin-mocha.rasi: ~/.local/share/rofi/themes
+	curl -s https://raw.githubusercontent.com/catppuccin/rofi/main/basic/.local/share/rofi/themes/catppuccin-mocha.rasi > ~/.config/rofi/catppuccin-mocha.rasi
+	sed -i 's/JetBrainsMono Nerd Font/MesloLGS Nerd Font/g' ~/.config/rofi/catppuccin-mocha.rasi
 
 ~/.tmux.conf:
 	cp tmux/tmux.conf ~/.tmux.conf
@@ -81,7 +97,7 @@ add_qtile: ~/.config/qtile/config.py ~/.config/qtile/defaults.py ~/.config/qtile
 add_ranger: ~/.config/ranger/rc.conf
 
 .PHONY: add_rofi
-add_rofi: ~/.config/rofi/base16-seti.rasi ~/.config/rofi/config.rasi
+add_rofi: ~/.config/rofi/config.rasi ~/.local/share/rofi/themes/catppuccin-frappe.rasi ~/.local/share/rofi/themes/catppuccin-latte.rasi ~/.local/share/rofi/themes/catppuccin-macchiato.rasi ~/.local/share/rofi/themes/catppuccin-mocha.rasi
 
 .PHONY: add_tmux
 add_tmux: ~/.tmux.conf ~/.tmux/plugins/tpm
@@ -119,8 +135,8 @@ del_ranger:
 
 .PHONY: del_rofi
 del_rofi:
-	rm -Rf ~/.config/rofi/base16-seti.rasi
 	rm -Rf ~/.config/rofi/config.rasi
+	rm -Rf ~/.local/share/rofi/themes/catppuccin-*.rasi
 
 .PHONY: del_tmux
 del_tmux:

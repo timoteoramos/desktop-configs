@@ -3,7 +3,7 @@
 ## Visual Specifications
 
 - Font: [MesloLGS Nerd Font](https://www.nerdfonts.com/)
-- Theme used: [base16-seti.rasi](https://gitlab.com/jordiorlando/base16-rofi/-/blob/master/themes/base16-seti.rasi)
+- Theme used: [Catppuccin for Rofi](https://github.com/catppuccin/rofi)
 
 ## Dependencies
 
