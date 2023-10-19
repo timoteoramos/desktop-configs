@@ -94,6 +94,10 @@ setup_archlinux:
 		alacritty \
 		atril \
 		caja \
+		caja-image-converter \
+		caja-sendto \
+		caja-share \
+		caja-xattr-tags \
 		chromium \
 		copyq \
 		cpio \
