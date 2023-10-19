@@ -79,14 +79,8 @@ layouts = [
 ]
 
 bottom_bar = [
-    widget.GroupBox(
-        block_highlight_text_color=theme.colors['bar_foreground'],
-        disable_drag=True,
-        highlight_method='line',
-        inactive=theme.colors['bar_foreground_inactive'],
-        this_current_screen_border=theme.colors['bar_foreground_selected'],
-        this_screen_border=theme.colors['bar_foreground_selected'],
-
+    widget.CurrentLayout(
+        foreground=theme.colors['bar_foreground'],
     ),
     widget.Chord(
         chords_colors={
@@ -127,8 +121,14 @@ screens = [
         ),
         top=bar.Bar(
             [
-                widget.CurrentLayout(
-                    foreground=theme.colors['bar_foreground'],
+                widget.GroupBox(
+                    block_highlight_text_color=theme.colors['bar_foreground'],
+                    disable_drag=True,
+                    highlight_method='line',
+                    inactive=theme.colors['bar_foreground_inactive'],
+                    this_current_screen_border=theme.colors['bar_foreground_selected'],
+                    this_screen_border=theme.colors['bar_foreground_selected'],
+
                 ),
                 widget.TaskList(
                     border=theme.colors['border_focus'],
