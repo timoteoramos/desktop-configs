@@ -81,7 +81,7 @@ clean: del_gtk del_nerdfont del_tmux del_zsh
 setup_archlinux:
 	ln -sf /usr/share/zoneinfo/$(SYSTEM_TIMEZONE) /etc/localtime
 	hwclock --systohc
-	echo "$(SYSTEM_LOCALE)" > /etc/locale.gen
+	echo "$(SYSTEM_LOCALE) UTF-8" > /etc/locale.gen
 	locale-gen
 	echo "LANG=$(SYSTEM_LOCALE)" > /etc/locale.conf
 	echo "KEYMAP=$(SYSTEM_KEYMAP)" > /etc/vconsole.conf
