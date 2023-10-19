@@ -1,3 +1,7 @@
+has_battery = True
+
+network_interface = 'wlp2s0'
+
 terminal = 'alacritty'
 
 startup_apps = [

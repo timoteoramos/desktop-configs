@@ -4,8 +4,8 @@ from libqtile.lazy import lazy
 import defaults, subprocess, theme
 
 widget_defaults = dict(
-    font=theme.fontconfig['lower_name'],
-    fontsize=theme.fontconfig['lower_size'],
+    font=theme.fontconfig['bar_name'],
+    fontsize=theme.fontconfig['bar_size'],
 )
 
 extension_defaults = widget_defaults.copy()
@@ -41,7 +41,7 @@ keys = [
     Key([mod, 'control'], 'r', lazy.reload_config(), desc='Reload the config'),
     Key([mod, 'control'], 'q', lazy.shutdown(), desc='Shutdown Qtile'),
     Key([mod], 'r', lazy.spawncmd(), desc='Spawn a command using a prompt widget'),
-    Key([mod], 'Return', lazy.spawn('rofi -show drun -show-icons'), desc='Launch Rofi'),
+    Key([mod], 'd', lazy.spawn('rofi -show drun -show-icons'), desc='Launch Rofi'),
 ]
 
 groups = [Group(i) for i in '123456789']
@@ -70,63 +70,81 @@ layouts = [
         border_focus=theme.colors['border_focus'],
         border_normal=theme.colors['border_normal'],
         border_on_single=True,
-        border_width=1,
+        border_width=2,
         fair=True,
-        margin=2,
+        margin=3,
         margin_on_single=True,
     ),
 ]
 
+bottom_bar = [
+    widget.GroupBox(
+        block_highlight_text_color=theme.colors['bar_foreground'],
+        disable_drag=True,
+        highlight_method='line',
+        inactive=theme.colors['bar_foreground_inactive'],
+        this_current_screen_border=theme.colors['bar_foreground_selected'],
+        this_screen_border=theme.colors['bar_foreground_selected'],
 
+    ),
+    widget.Chord(
+        chords_colors={
+            'launch': (theme.colors['highlight_urgent'], theme.colors['bar_foreground']),
+        },
+        name_transform=lambda name: name.upper(),
+    ),
+    widget.Prompt(
+        foreground=theme.colors['bar_foreground'],
+    ),
+    widget.Spacer(
+        length=bar.STRETCH,
+    ),
+    widget.CPU(),
+    widget.CPUGraph(),
+    widget.Memory(),
+    widget.MemoryGraph(),
+    widget.Net(
+        interface=defaults.network_interface,
+    ),
+    widget.NetGraph(
+        interface=defaults.network_interface,
+    ),
+    widget.Load(),
+]
+
+if defaults.has_battery:
+    bottom_bar.append(widget.Battery())
+    bottom_bar.append(widget.BatteryIcon())
 
 screens = [
     Screen(
         bottom=bar.Bar(
-            [
-                widget.GroupBox(
-                    block_highlight_text_color=theme.colors['lower_foreground'],
-                    disable_drag=True,
-                    highlight_method='block',
-                    inactive=theme.colors['lower_foreground_inactive'],
-                    this_current_screen_border=theme.colors['lower_foreground_selected'],
-                    this_screen_border=theme.colors['lower_foreground_selected'],
-
-                ),
-                widget.Chord(
-                    chords_colors={
-                        'launch': (theme.colors['highlight_urgent'], theme.colors['lower_foreground']),
-                    },
-                    name_transform=lambda name: name.upper(),
-                ),
-                widget.Prompt(
-                    foreground=theme.colors['lower_foreground'],
-                ),
-            ],
+            bottom_bar,
             24,
-            background=theme.colors['lower_background'],
+            background=theme.colors['bar_background'],
+            opacity=0.5,
         ),
         top=bar.Bar(
             [
                 widget.CurrentLayout(
-                    font=theme.fontconfig['upper_name'],
-                    fontsize=theme.fontconfig['upper_size'],
+                    foreground=theme.colors['bar_foreground'],
                 ),
                 widget.TaskList(
                     border=theme.colors['border_focus'],
                     borderwidth=1,
-                    font=theme.fontconfig['upper_name'],
-                    fontsize=theme.fontconfig['upper_size'],
+                    foreground=theme.colors['bar_foreground'],
                     rounded=False,
                     title_width_method='uniform',
                 ),
                 widget.Systray(),
                 widget.Clock(
-                    font=theme.fontconfig['upper_name'],
-                    fontsize=theme.fontconfig['upper_size'],
+                    foreground=theme.colors['bar_foreground'],
                     format='%d/%m/%Y %a %H:%M %p',
                 ),
             ],
             28,
+            background=theme.colors['bar_background'],
+            opacity=0.5,
         ),
     ),
 ]
