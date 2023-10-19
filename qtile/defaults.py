@@ -10,4 +10,5 @@ startup_apps = [
     ['/usr/libexec/xfce-polkit'],
     ['/usr/bin/nm-applet'],
     ['/usr/bin/volumeicon'],
+    ['/usr/bin/light-locker'],
 ]
