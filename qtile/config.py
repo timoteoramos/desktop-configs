@@ -41,7 +41,7 @@ keys = [
     Key([mod, 'control'], 'r', lazy.reload_config(), desc='Reload the config'),
     Key([mod, 'control'], 'q', lazy.shutdown(), desc='Shutdown Qtile'),
     Key([mod], 'r', lazy.spawncmd(), desc='Spawn a command using a prompt widget'),
-    Key([mod], 'd', lazy.spawn('rofi -show drun -show-icons'), desc='Launch Rofi'),
+    Key([mod], 'd', lazy.spawn('rofi -show combi -show-icons'), desc='Launch Rofi'),
     Key([mod], 'l', lazy.spawn('light-locker-command --lock'), desc='Lock screen'),
 ]
 
