@@ -124,6 +124,7 @@ setup_archlinux:
 		pipewire-audio \
 		pipewire-jack \
 		pipewire-pulse \
+		pluma \
 		pv \
 		python-dbus-next \
 		python-pipx \
