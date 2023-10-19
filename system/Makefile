@@ -1,4 +1,7 @@
 .DEFAULT_GOAL := install
+GTK_FONTS := Noto Sans 10
+GTK_ICONS := Mint-Y-Aqua
+GTK_THEME := Mint-Y-Aqua
 SYSTEM_KEYMAP := br-abnt2
 SYSTEM_LOCALE := pt_BR.UTF-8
 SYSTEM_TIMEZONE := America/Araguaina
@@ -8,13 +11,13 @@ ZSHPREFIX := /etc
 	mkdir -p /etc/gtk-2.0
 
 /etc/gtk-2.0/gtkrc: /etc/gtk-2.0
-	cp gtkrc /etc/gtk-2.0/
+	GTK_FONTS="$(GTK_FONTS)" GTK_ICONS="$(GTK_ICONS)" GTK_THEME="$(GTK_THEME)" eval "echo \"`<gtkrc`\"" > /etc/gtk-2.0/gtkrc
 
 /etc/gtk-3.0:
 	mkdir -p /etc/gtk-3.0
 
 /etc/gtk-3.0/settings.ini: /etc/gtk-3.0
-	cp settings.ini /etc/gtk-3.0/
+	GTK_FONTS="$(GTK_FONTS)" GTK_ICONS="$(GTK_ICONS)" GTK_THEME="$(GTK_THEME)" eval "echo \"`<settings.ini`\"" > /etc/gtk-3.0/settings.ini
 
 /etc/tmux.conf:
 	cp tmux.conf /etc/tmux.conf
@@ -82,6 +85,7 @@ setup_archlinux:
 	locale-gen
 	echo "LANG=$(SYSTEM_LOCALE)" > /etc/locale.conf
 	echo "KEYMAP=$(SYSTEM_KEYMAP)" > /etc/vconsole.conf
+	make GTK_FONTS="Noto Sans 10" GTK_ICONS="elementary" GTK_THEME="BlueMenta" del_gtk add_gtk
 	pacman -Sy lightdm-gtk-greeter-settings
 	systemctl set-default graphical.target
 	systemctl enable lightdm.service
@@ -115,6 +119,7 @@ setup_archlinux:
 		noto-fonts-emoji \
 		noto-fonts-extra \
 		p7zip \
+		pavucontrol \
 		pipewire-alsa \
 		pipewire-audio \
 		pipewire-jack \
@@ -133,6 +138,7 @@ setup_archlinux:
 		thunderbird-i18n-pt-br \
 		tmux \
 		unzip \
+		volumeicon \
 		wget \
 		wireplumber \
 		xorg-fonts-100dpi \
