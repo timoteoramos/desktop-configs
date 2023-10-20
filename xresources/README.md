@@ -2,8 +2,8 @@
 
 ## Visual Specifications
 
-- Font: [MesloLGS Nerd Font](https://www.nerdfonts.com/)
-- Theme used: [base16-seti-256.Xresources](https://github.com/tinted-theming/base16-xresources/blob/main/xresources/base16-seti-256.Xresources)
+- Font: [JetBrainsMono Nerd Font](https://www.nerdfonts.com/)
+- Theme used: [Catppuccin for Xresources](https://github.com/catppuccin/xresources)
 
 ## Compatibility
 

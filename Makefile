@@ -4,7 +4,21 @@ QTILE_TERM := alacritty
 
 ~/.Xresources:
 	cp xresources/Xresources ~/.Xresources
-	xrdb ~/.Xresources
+
+~/.Xresources.d/catppuccin:
+	mkdir -p ~/.Xresources.d/catppuccin
+
+~/.Xresources.d/catppuccin/frappe.Xresources: ~/.Xresources.d/catppuccin
+	curl -s https://raw.githubusercontent.com/catppuccin/xresources/main/frappe.Xresources > ~/.Xresources.d/catppuccin/frappe.Xresources
+
+~/.Xresources.d/catppuccin/latte.Xresources: ~/.Xresources.d/catppuccin
+	curl -s https://raw.githubusercontent.com/catppuccin/xresources/main/latte.Xresources > ~/.Xresources.d/catppuccin/latte.Xresources
+
+~/.Xresources.d/catppuccin/macchiato.Xresources: ~/.Xresources.d/catppuccin
+	curl -s https://raw.githubusercontent.com/catppuccin/xresources/main/macchiato.Xresources > ~/.Xresources.d/catppuccin/macchiato.Xresources
+
+~/.Xresources.d/catppuccin/mocha.Xresources: ~/.Xresources.d/catppuccin
+	curl -s https://raw.githubusercontent.com/catppuccin/xresources/main/mocha.Xresources > ~/.Xresources.d/catppuccin/mocha.Xresources
 
 ~/.config/alacritty:
 	mkdir -p ~/.config/alacritty
@@ -114,7 +128,8 @@ add_rofi: ~/.config/rofi/config.rasi ~/.local/share/rofi/themes/catppuccin-frapp
 add_tmux: ~/.tmux.conf ~/.tmux/plugins/tpm
 
 .PHONY: add_xresources
-add_xresources: ~/.Xresources
+add_xresources: ~/.Xresources ~/.Xresources.d/catppuccin/frappe.Xresources ~/.Xresources.d/catppuccin/latte.Xresources ~/.Xresources.d/catppuccin/macchiato.Xresources ~/.Xresources.d/catppuccin/mocha.Xresources
+	xrdb ~/.Xresources
 
 .PHONY: add_zsh
 add_zsh: ~/.zshrc
@@ -158,6 +173,7 @@ del_tmux:
 .PHONY: del_xresources
 del_xresources:
 	rm -Rf ~/.Xresources
+	rm -Rf ~/.Xresources.d/catppuccin
 
 .PHONY: del_zsh
 del_zsh:
