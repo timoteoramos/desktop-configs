@@ -142,6 +142,7 @@ setup_archlinux:
 		python-pynvim \
 		python-pyxdg \
 		qtile \
+		qutebrowser \
 		ranger \
 		rofi \
 		rpm-tools \

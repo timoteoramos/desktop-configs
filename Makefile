@@ -53,6 +53,9 @@ QTILE_TERM := alacritty
 ~/.config/qutebrowser/config.py: ~/.config/qutebrowser
 	cp qutebrowser/config.py ~/.config/qutebrowser/
 
+~/.config/qutebrowser/catppuccin:
+	git clone https://github.com/catppuccin/qutebrowser.git ~/.config/qutebrowser/catppuccin
+
 ~/.config/qtile:
 	mkdir -p ~/.config/qtile
 
@@ -113,7 +116,7 @@ add_neovim:
 	cd neovim ; make install
 
 .PHONY: add_qutebrowser
-add_qutebrowser: ~/.config/qutebrowser/config.py
+add_qutebrowser: ~/.config/qutebrowser/config.py ~/.config/qutebrowser/catppuccin
 
 .PHONY: add_qtile
 add_qtile: ~/.config/qtile/config.py ~/.config/qtile/defaults.py ~/.config/qtile/theme.py
