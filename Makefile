@@ -65,9 +65,6 @@ QTILE_TERM := alacritty
 ~/.config/qtile/defaults.py: ~/.config/qtile
 	cp qtile/defaults.py ~/.config/qtile/
 
-~/.config/qtile/theme.py: ~/.config/qtile
-	cp qtile/theme.py ~/.config/qtile/
-
 ~/.config/ranger:
 	mkdir -p ~/.config/ranger
 
@@ -119,7 +116,7 @@ add_neovim:
 add_qutebrowser: ~/.config/qutebrowser/config.py ~/.config/qutebrowser/catppuccin
 
 .PHONY: add_qtile
-add_qtile: ~/.config/qtile/config.py ~/.config/qtile/defaults.py ~/.config/qtile/theme.py
+add_qtile: ~/.config/qtile/config.py ~/.config/qtile/defaults.py
 
 .PHONY: add_ranger
 add_ranger: ~/.config/ranger/rc.conf
@@ -157,7 +154,6 @@ del_qutebrowser:
 .PHONY: del_qtile
 del_qtile:
 	rm -Rf ~/.config/qtile/config.py
-	rm -Rf ~/.config/qtile/theme.py
 
 .PHONY: del_ranger
 del_ranger:

@@ -1,11 +1,21 @@
 from libqtile import bar, hook, layout, widget
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
-import defaults, subprocess, theme
+from pathlib import Path
+from yaml import load, Loader
+import defaults, subprocess
+
+with open(Path('~/.config/alacritty/alacritty.yml').expanduser(), 'r') as f:
+    alacritty_data = load(f.read(), Loader=Loader)
+
+if 'import' in alacritty_data:
+    for conf in alacritty_data['import']:
+        with open(Path(conf).expanduser(), 'r') as f:
+            alacritty_data.update(load(f.read(), Loader=Loader))
 
 widget_defaults = dict(
-    font=theme.fontconfig['bar_name'],
-    fontsize=theme.fontconfig['bar_size'],
+    font=alacritty_data['font']['normal']['family'],
+    fontsize=alacritty_data['font']['size'],
 )
 
 extension_defaults = widget_defaults.copy()
@@ -68,8 +78,8 @@ for i in groups:
 layouts = [
     layout.Max(),
     layout.Columns(
-        border_focus=theme.colors['border_focus'],
-        border_normal=theme.colors['border_normal'],
+        border_focus=defaults.border_colors['focus'],
+        border_normal=defaults.border_colors['normal'],
         border_on_single=True,
         border_width=2,
         fair=True,
@@ -80,16 +90,16 @@ layouts = [
 
 bottom_bar = [
     widget.CurrentLayout(
-        foreground=theme.colors['bar_foreground'],
+        foreground=alacritty_data['colors']['primary']['foreground'].replace('#', ''),
     ),
     widget.Chord(
         chords_colors={
-            'launch': (theme.colors['highlight_urgent'], theme.colors['bar_foreground']),
+            'launch': (alacritty_data['colors']['normal']['red'].replace('#', ''), alacritty_data['colors']['primary']['foreground'].replace('#', '')),
         },
         name_transform=lambda name: name.upper(),
     ),
     widget.Prompt(
-        foreground=theme.colors['bar_foreground'],
+        foreground=alacritty_data['colors']['primary']['foreground'].replace('#', ''),
     ),
     widget.Spacer(
         length=bar.STRETCH,
@@ -114,41 +124,41 @@ if defaults.has_battery:
 screens = [
     Screen(
         bottom=bar.Bar(
-            bottom_bar,
-            24,
-            background=theme.colors['bar_background'],
-            opacity=0.5,
-        ),
-        top=bar.Bar(
             [
                 widget.GroupBox(
-                    block_highlight_text_color=theme.colors['bar_foreground'],
+                    block_highlight_text_color=alacritty_data['colors']['primary']['foreground'].replace('#', ''),
                     disable_drag=True,
                     highlight_method='line',
-                    inactive=theme.colors['bar_foreground_inactive'],
-                    this_current_screen_border=theme.colors['bar_foreground_selected'],
-                    this_screen_border=theme.colors['bar_foreground_selected'],
+                    inactive=alacritty_data['colors']['search']['matches']['background'].replace('#', ''),
+                    this_current_screen_border=alacritty_data['colors']['selection']['background'].replace('#', ''),
+                    this_screen_border=alacritty_data['colors']['selection']['background'].replace('#', ''),
 
                 ),
                 widget.TaskList(
-                    border=theme.colors['border_focus'],
+                    border=defaults.border_colors['focus'],
                     borderwidth=1,
-                    foreground=theme.colors['bar_foreground'],
+                    foreground=alacritty_data['colors']['primary']['foreground'].replace('#', ''),
                     rounded=False,
                     title_width_method='uniform',
                 ),
                 widget.Systray(),
                 widget.Clock(
-                    foreground=theme.colors['bar_foreground'],
+                    foreground=alacritty_data['colors']['primary']['foreground'].replace('#', ''),
                     format='%d/%m/%Y %a %H:%M %p',
                 ),
             ],
             28,
-            background=theme.colors['bar_background'],
+            background=alacritty_data['colors']['primary']['background'].replace('#', ''),
+            opacity=0.5,
+        ),
+        top=bar.Bar(
+            bottom_bar,
+            24,
+            background=alacritty_data['colors']['primary']['background'].replace('#', ''),
             opacity=0.5,
         ),
     ),
-]
+0]
 
 mouse = [
     Drag([mod], 'Button1', lazy.window.set_position_floating(), start=lazy.window.get_position()),

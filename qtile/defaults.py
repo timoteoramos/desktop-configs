@@ -1,3 +1,8 @@
+border_colors = {
+    'focus': '5555ff',
+    'normal': 'aaaaff',
+}
+
 has_battery = True
 
 network_interface = 'wlp2s0'
