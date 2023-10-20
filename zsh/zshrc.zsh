@@ -33,3 +33,4 @@ zinit for \
   sindresorhus/pure
 
 zstyle :prompt:pure:path color white
+zstyle ":history-search-multi-word" highlight-color "bg=0"

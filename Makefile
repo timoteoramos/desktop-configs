@@ -12,6 +12,21 @@ QTILE_TERM := alacritty
 ~/.config/alacritty/alacritty.yml: ~/.config/alacritty
 	cp alacritty/alacritty.yml ~/.config/alacritty/
 
+~/.config/alacritty/catppuccin:
+	mkdir -p ~/.config/alacritty/catppuccin
+
+~/.config/alacritty/catppuccin/catppuccin-frappe.yml: ~/.config/alacritty/catppuccin
+	curl -s https://raw.githubusercontent.com/catppuccin/alacritty/main/catppuccin-frappe.yml > ~/.config/alacritty/catppuccin/catppuccin-frappe.yml
+
+~/.config/alacritty/catppuccin/catppuccin-latte.yml: ~/.config/alacritty/catppuccin
+	curl -s https://raw.githubusercontent.com/catppuccin/alacritty/main/catppuccin-latte.yml > ~/.config/alacritty/catppuccin/catppuccin-latte.yml
+
+~/.config/alacritty/catppuccin/catppuccin-macchiato.yml: ~/.config/alacritty/catppuccin
+	curl -s https://raw.githubusercontent.com/catppuccin/alacritty/main/catppuccin-macchiato.yml > ~/.config/alacritty/catppuccin/catppuccin-macchiato.yml
+
+~/.config/alacritty/catppuccin/catppuccin-mocha.yml: ~/.config/alacritty/catppuccin
+	curl -s https://raw.githubusercontent.com/catppuccin/alacritty/main/catppuccin-mocha.yml > ~/.config/alacritty/catppuccin/catppuccin-mocha.yml
+
 ~/.config/dunst:
 	mkdir -p ~/.config/dunst
 
@@ -74,7 +89,7 @@ QTILE_TERM := alacritty
 	cp zsh/zshrc.zsh ~/.zshrc
 
 .PHONY: add_alacritty
-add_alacritty: ~/.config/alacritty/alacritty.yml
+add_alacritty: ~/.config/alacritty/alacritty.yml ~/.config/alacritty/catppuccin/catppuccin-frappe.yml ~/.config/alacritty/catppuccin/catppuccin-latte.yml ~/.config/alacritty/catppuccin/catppuccin-macchiato.yml ~/.config/alacritty/catppuccin/catppuccin-mocha.yml
 
 .PHONY: add_dust
 add_dunst: ~/.config/dunst/dunstrc
@@ -107,6 +122,7 @@ add_zsh: ~/.zshrc
 .PHONY: del_alacritty
 del_alacritty:
 	rm -Rf ~/.config/alacritty/alacritty.yml
+	rm -Rf ~/.config/alacritty/catppuccin
 
 .PHONY: del_dunst
 del_dunst:
