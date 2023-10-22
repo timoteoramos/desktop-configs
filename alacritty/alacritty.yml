@@ -18,6 +18,3 @@ font:
     family: JetBrainsMono Nerd Font
     style: Bold Italic
   size: 10
-
-window:
-  opacity: 0.9
