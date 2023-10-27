@@ -68,7 +68,7 @@ QTILE_TERM := alacritty
 ~/.config/ranger:
 	mkdir -p ~/.config/ranger
 
-~/.config/ranger/rc.conf:
+~/.config/ranger/rc.conf: ~/.config/ranger
 	cp ranger/rc.conf ~/.config/ranger
 
 ~/.config/rofi:
